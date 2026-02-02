@@ -195,7 +195,7 @@ const AppSidebar = () => {
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild>
-                                    <Link href={'/orders'}>
+                                    <Link href={'/payments'}>
                                         <ShoppingBasket />
                                         <span className="font-semibold">See All Transactions</span>
                                     </Link>
