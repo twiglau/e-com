@@ -1,0 +1,19 @@
+{
+  "name": "order-service",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "dev": "pnpm dlx tsx --env-file=.env --watch src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@clerk/fastify": "^2.6.19",
+    "fastify": "^5.7.2"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  }
+}
