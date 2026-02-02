@@ -22,3 +22,22 @@ export const shouldBeUser = (
   req.userId = auth.userId;
   next();
 };
+
+export const shouldBeAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const auth = getAuth(req);
+  if (!auth?.userId) {
+    return res.status(401).json({ message: "You are not logged in" });
+  }
+
+  const claims = auth.sessionClaims as CustomJwtSessionClaims;
+  if (claims.metadata?.role !== "admin") {
+    return res.status(403).json({ message: "You are not authorized" });
+  }
+
+  req.userId = auth.userId;
+  next();
+};

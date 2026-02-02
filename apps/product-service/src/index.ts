@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import { shouldBeUser } from "./middleware/authMiddleware.js";
+import categoryRouter from "./routes/category.route.js";
+import productRouter from "./routes/product.route.js";
 
 const app = express();
 app.use(
@@ -20,6 +22,9 @@ app.get("/", (req, res) => {
 app.get("/test", shouldBeUser, (req, res) => {
   res.json({ message: "Product service authenticated", userId: req.userId });
 });
+
+app.use("/categories", categoryRouter);
+app.use("/products", productRouter);
 
 app.listen(8000, "0.0.0.0", () => {
   console.log("Product Server started on port 8000");
