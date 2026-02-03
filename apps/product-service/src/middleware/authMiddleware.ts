@@ -1,5 +1,6 @@
 import { getAuth } from "@clerk/express";
 import { NextFunction, Request, Response } from "express";
+import type { CustomJwtSessionClaims } from "@repo/types";
 
 declare global {
   namespace Express {

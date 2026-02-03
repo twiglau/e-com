@@ -16,6 +16,7 @@
     "fastify": "^5.7.2"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@repo/types": "workspace:*"
   }
 }

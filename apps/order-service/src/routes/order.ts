@@ -1,13 +1,18 @@
 import { FastifyInstance } from "fastify";
 import { OrderModel } from "@repo/order-db";
 import { startOfMonth, subMonths } from "date-fns";
+import { shouldBeUser } from "../middleware/authMiddleware";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
   // 用户订单列表
-  fastify.get("/user-orders", async (request, reply) => {
-    const orders = await OrderModel.find({ userId: request.userId });
-    return reply.status(200).send(orders);
-  });
+  fastify.get(
+    "/user-orders",
+    { preHandler: shouldBeUser },
+    async (request, reply) => {
+      const orders = await OrderModel.find({ userId: request.userId });
+      return reply.status(200).send(orders);
+    },
+  );
 
   // 所有订单
   fastify.get("/orders", async (request, reply) => {
