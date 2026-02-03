@@ -293,6 +293,15 @@ importers:
         specifier: ^8.50.0
         version: 8.50.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.2)
 
+  packages/order-db:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^25.2.0
+        version: 25.2.0
+
   packages/product-db:
     dependencies:
       '@prisma/adapter-pg':

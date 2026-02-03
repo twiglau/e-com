@@ -4,6 +4,7 @@ import { clerkMiddleware } from "@clerk/express";
 import { shouldBeUser } from "./middleware/authMiddleware.js";
 import categoryRouter from "./routes/category.route.js";
 import productRouter from "./routes/product.route.js";
+import { errorHandler } from "./utils/error.js";
 
 const app = express();
 app.use(
@@ -13,6 +14,7 @@ app.use(
   }),
 );
 
+app.use(express.json());
 app.use(clerkMiddleware());
 
 app.get("/", (req, res) => {
@@ -25,6 +27,8 @@ app.get("/test", shouldBeUser, (req, res) => {
 
 app.use("/categories", categoryRouter);
 app.use("/products", productRouter);
+
+app.use(errorHandler);
 
 app.listen(8000, "0.0.0.0", () => {
   console.log("Product Server started on port 8000");
