@@ -6,7 +6,10 @@ import { connnectionOrderDb } from "@repo/order-db";
 
 const app = fastify();
 
-app.register(clerkPlugin);
+app.register(clerkPlugin, {
+  publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+  secretKey: process.env.CLERK_SECRET_KEY,
+});
 
 app.get("/", (req, res) => {
   return res.send({ message: "Order endpoint works!" });

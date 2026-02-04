@@ -19,7 +19,10 @@ export const shouldBeUser = async (
   request: FastifyRequest,
   reply: FastifyReply,
 ) => {
+  console.log("🔍 shouldBeUser - Headers:", request.headers.authorization);
   const auth = getAuth(request);
+  console.log("🔍 shouldBeUser - Auth object:", auth);
+
   if (!auth?.userId) {
     return reply.status(401).send({ message: "You are not logged in" });
   }
@@ -30,12 +33,15 @@ export const shouldBeAdmin = async (
   request: FastifyRequest,
   reply: FastifyReply,
 ) => {
+  console.log("🔍 shouldBeAdmin - Headers:", request.headers.authorization);
   const auth = getAuth(request);
-  console.log("auth", auth);
+  console.log("🔍 shouldBeAdmin - Auth object:", auth);
+
   if (!auth?.userId) {
     return reply.status(401).send({ message: "You are not logged in" });
   }
   const sessionClaims = auth.sessionClaims as CustomJwtSessionClaims;
+  console.log("🔍 shouldBeAdmin - Session claims:", sessionClaims);
 
   if (sessionClaims?.metadata?.role !== "admin") {
     return reply.status(403).send({ message: "You are not authorized" });
