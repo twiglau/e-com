@@ -208,6 +208,9 @@ importers:
       fastify:
         specifier: ^5.7.2
         version: 5.7.2
+      stripe:
+        specifier: ^20.3.0
+        version: 20.3.0(@types/node@20.19.30)
     devDependencies:
       '@repo/types':
         specifier: workspace:*
@@ -227,6 +230,9 @@ importers:
       hono:
         specifier: ^4.11.7
         version: 4.11.7
+      stripe:
+        specifier: ^20.3.0
+        version: 20.3.0(@types/node@20.19.30)
     devDependencies:
       '@repo/types':
         specifier: workspace:*
@@ -307,6 +313,19 @@ importers:
       typescript-eslint:
         specifier: ^8.50.0
         version: 8.50.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.2)
+
+  packages/kafka:
+    dependencies:
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^24.3.1
+        version: 24.10.10
 
   packages/order-db:
     dependencies:
@@ -1743,6 +1762,9 @@ packages:
   '@types/node@20.19.30':
     resolution: {integrity: sha512-WJtwWJu7UdlvzEAUm484QNg5eAoq5QR08KDNx7g45Usrs2NtOPiX8ugDqmKdXkyL03rBqU5dYNYVQetEpBHq2g==}
 
+  '@types/node@24.10.10':
+    resolution: {integrity: sha512-+0/4J266CBGPUq/ELg7QUHhN25WYjE0wYTPSQJn1xeu8DOlIOPxXxrNGiLmfAWl7HMMgWFWXpt9IDjMWrF5Iow==}
+
   '@types/node@25.2.0':
     resolution: {integrity: sha512-DZ8VwRFUNzuqJ5khrvwMXHmvPe+zGayJhr2CDNiKB1WBE1ST8Djl00D0IC4vvNmHMdj6DlbYRIaFE7WHjlDl5w==}
 
@@ -2747,6 +2769,10 @@ packages:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
 
+  kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
+
   kareem@3.0.0:
     resolution: {integrity: sha512-RKhaOBSPN8L7y4yAgNhDT2602G5FD6QbOIISbjN9D6mjHPeqeg7K+EB5IGSU5o81/X2Gzm3ICnAvQW3x3OP8HA==}
     engines: {node: '>=18.0.0'}
@@ -3604,6 +3630,15 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  stripe@20.3.0:
+    resolution: {integrity: sha512-DYzcmV1MfYhycr1GwjCjeQVYk9Gu8dpxyTlu7qeDCsuguug7oUTxPsUQuZeSf/OPzK7pofqobvOKVqAwlpgf/Q==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@types/node': '>=16'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   styled-jsx@5.1.6:
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
@@ -5147,6 +5182,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@24.10.10':
+    dependencies:
+      undici-types: 7.16.0
+
   '@types/node@25.2.0':
     dependencies:
       undici-types: 7.16.0
@@ -6367,6 +6406,8 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
+  kafkajs@2.2.4: {}
+
   kareem@3.0.0: {}
 
   keygrip@1.1.0:
@@ -7273,6 +7314,10 @@ snapshots:
       es-object-atoms: 1.1.1
 
   strip-json-comments@3.1.1: {}
+
+  stripe@20.3.0(@types/node@20.19.30):
+    optionalDependencies:
+      '@types/node': 20.19.30
 
   styled-jsx@5.1.6(react@19.1.0):
     dependencies:
