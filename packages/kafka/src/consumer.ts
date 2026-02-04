@@ -10,7 +10,7 @@ export const createKafkaConsumer = (kafka: Kafka, groupId: string) => {
   const subscribe = async (
     topics: {
       name: string;
-      handler: (message: string) => Promise<void>;
+      handler: (message: any) => Promise<void>;
     }[],
   ) => {
     await consumer.subscribe({
@@ -24,7 +24,7 @@ export const createKafkaConsumer = (kafka: Kafka, groupId: string) => {
           if (config) {
             const value = message.value?.toString();
             if (value) {
-              await config.handler(value);
+              await config.handler(JSON.parse(value));
             }
           }
         } catch (error) {

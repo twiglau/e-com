@@ -3,6 +3,8 @@ import { clerkPlugin } from "@clerk/fastify";
 import { shouldBeUser } from "./middleware/authMiddleware";
 import { orderRoute } from "./routes/order";
 import { connnectionOrderDb } from "@repo/order-db";
+import { kafkaConsumer, kafkaProducer } from "./utils/kafka";
+import { runKafkaSubscriptions } from "./utils/subscriptions";
 
 const app = fastify();
 
@@ -26,7 +28,13 @@ app.register(orderRoute);
 
 const start = async () => {
   try {
-    await connnectionOrderDb();
+    Promise.all([
+      await connnectionOrderDb(),
+      await kafkaProducer.connect(),
+      await kafkaConsumer.connect(),
+    ]);
+
+    await runKafkaSubscriptions();
     await app.listen({ port: 8001, host: "0.0.0.0" });
     console.log(`Order Server listening at http://localhost:8001`);
   } catch (err) {

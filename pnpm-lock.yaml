@@ -199,6 +199,9 @@ importers:
       '@clerk/fastify':
         specifier: ^2.6.19
         version: 2.6.19(fastify@5.7.2)(react-dom@19.1.0(react@19.2.0))(react@19.2.0)
+      '@repo/kafka':
+        specifier: workspace:*
+        version: link:../../packages/kafka
       '@repo/order-db':
         specifier: workspace:*
         version: link:../../packages/order-db
