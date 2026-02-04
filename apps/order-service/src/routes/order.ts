@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { OrderModel } from "@repo/order-db";
 import { startOfMonth, subMonths } from "date-fns";
-import { shouldBeUser } from "../middleware/authMiddleware";
+import { shouldBeUser, shouldBeAdmin } from "../middleware/authMiddleware";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
   // 用户订单列表
@@ -15,14 +15,18 @@ export const orderRoute = async (fastify: FastifyInstance) => {
   );
 
   // 所有订单
-  fastify.get("/orders", async (request, reply) => {
-    const { limit, page } = request.query as { limit: number; page: number };
-    const orders = await OrderModel.find()
-      .limit(limit)
-      .skip((page - 1) * limit)
-      .sort({ createdAt: -1 });
-    return reply.status(200).send(orders);
-  });
+  fastify.get(
+    "/orders",
+    { preHandler: shouldBeAdmin },
+    async (request, reply) => {
+      const { limit, page } = request.query as { limit: number; page: number };
+      const orders = await OrderModel.find()
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .sort({ createdAt: -1 });
+      return reply.status(200).send(orders);
+    },
+  );
 
   // 订单统计
   fastify.get("/order-stats", async (request, reply) => {

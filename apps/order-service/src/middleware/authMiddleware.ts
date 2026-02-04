@@ -31,6 +31,7 @@ export const shouldBeAdmin = async (
   reply: FastifyReply,
 ) => {
   const auth = getAuth(request);
+  console.log("auth", auth);
   if (!auth?.userId) {
     return reply.status(401).send({ message: "You are not logged in" });
   }
