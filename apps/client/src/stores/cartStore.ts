@@ -4,7 +4,8 @@ import {
   CartStoreActionsType,
   CartStoreStateType,
   CartItemType,
-} from "../types";
+  ProductType,
+} from "@repo/types";
 
 export const useCartStore = create<CartStoreStateType & CartStoreActionsType>()(
   persist(
@@ -40,9 +41,9 @@ export const useCartStore = create<CartStoreStateType & CartStoreActionsType>()(
           };
         });
       },
-      removeFromCart: (id: string | number) => {
+      removeFromCart: (product: ProductType) => {
         set((state) => ({
-          cart: state.cart.filter((item) => item.id !== id),
+          cart: state.cart.filter((item) => item.id !== product.id),
         }));
       },
       clearCart: () => {

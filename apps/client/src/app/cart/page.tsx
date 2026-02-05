@@ -8,7 +8,7 @@ import ShippingForm from "@/components/ShippingForm";
 import PaymentForm from "@/components/PaymentForm";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ShippingFormInputsType } from '@/types';
+import type { ShippingFormInputs } from '@repo/types';
 
 
 import { Suspense } from 'react';
@@ -27,7 +27,7 @@ const CartPageContent = () => {
     const activeStep = parseInt(searchParams.get("step") || "1");
     const { cart, removeFromCart } = useCartStore();
 
-   const [shippingForm, setShippingForm] = React.useState<ShippingFormInputsType>();
+   const [shippingForm, setShippingForm] = React.useState<ShippingFormInputs>();
 
     return (
         <div className="flex flex-col gap-8 items-center justify-center mt-12">
