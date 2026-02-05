@@ -35,6 +35,7 @@ const ShippingForm = ({
                     type="text"
                     id="name"
                     {...register("name")}
+                    value="twiglau"
                     className="border-b border-gray-200 rounded-lg py-2 outline-none text-sm"
                 />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -45,6 +46,7 @@ const ShippingForm = ({
                     type="email"
                     id="email"
                     {...register("email")}
+                    value="liutwig@gmail.com"
                     className="border-b border-gray-200 rounded-lg py-2 outline-none text-sm"
                 />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
@@ -55,6 +57,7 @@ const ShippingForm = ({
                     type="text"
                     id="phone"
                     {...register("phone")}
+                    value="1234567890"
                     className="border-b border-gray-200 rounded-lg py-2 outline-none text-sm"
                 />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
@@ -65,6 +68,7 @@ const ShippingForm = ({
                     type="text"
                     id="address"
                     {...register("address")}
+                    value="123 Main St"
                     className="border-b border-gray-200 rounded-lg py-2 outline-none text-sm"
                 />
                 {errors.address && <p className="text-red-500 text-sm">{errors.address.message}</p>}
@@ -75,6 +79,7 @@ const ShippingForm = ({
                     type="text"
                     id="city"
                     {...register("city")}
+                    value="New York"
                     className="border-b border-gray-200 rounded-lg py-2 outline-none text-sm"
                 />
                 {errors.city && <p className="text-red-500 text-sm">{errors.city.message}</p>}

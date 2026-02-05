@@ -5,9 +5,47 @@ import Categories from "./Categories";
 import Filter from "./Filter";
 
 // TEMPORARY
-const products: ProductsType = [];
 
-const ProductList = ({category, params}: {category: string, params: "homepage" | "products"}) => {
+const fetchData = async ({
+    category, 
+    sort, 
+    search, 
+    params}
+    : {
+        category?: string, 
+        sort?:string, 
+        search?:string, 
+        params: "homepage" | "products"
+}) => {
+    let url = `${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products?category=${category || ""}`
+    
+    if(sort) {
+        url += `&sort=${sort}`
+    }
+    if(search) {
+        url += `&search=${search}`
+    }
+    if(params === "homepage") {
+        url += `&limit=8`
+    }
+    const res = await fetch(url)
+    const data: ProductsType = await res.json()
+    console.log('productList:', data)
+    return data;
+}
+
+const ProductList = async ({
+    category, 
+    sort, 
+    search, 
+    params}
+    : {
+        category: string, 
+        sort?:string, 
+        search?:string, 
+        params: "homepage" | "products"
+}) =>  {
+    const products = await fetchData({category, sort, search, params});
     return (
         <div className="w-full">
             <Categories />

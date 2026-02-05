@@ -28,13 +28,13 @@ app.register(orderRoute);
 
 const start = async () => {
   try {
-    Promise.all([
-      await connnectionOrderDb(),
-      await kafkaProducer.connect(),
-      await kafkaConsumer.connect(),
-    ]);
+    // Promise.all([
+    //   await connnectionOrderDb(),
+    //   await kafkaProducer.connect(),
+    //   await kafkaConsumer.connect(),
+    // ]);
 
-    await runKafkaSubscriptions();
+    // await runKafkaSubscriptions();
     await app.listen({ port: 8001, host: "0.0.0.0" });
     console.log(`Order Server listening at http://localhost:8001`);
   } catch (err) {

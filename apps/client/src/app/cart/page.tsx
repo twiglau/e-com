@@ -5,7 +5,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { useSearchParams } from "next/navigation";
 import CartItem from "@/components/CartItem";
 import ShippingForm from "@/components/ShippingForm";
-import PaymentForm from "@/components/PaymentForm";
+import { StripePaymentForm } from "@/components/StripePaymentForm";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { ShippingFormInputs } from '@repo/types';
@@ -59,12 +59,12 @@ const CartPageContent = () => {
                             </div>
                         ) : (
                             cart.map((item) => (
-                                <CartItem key={item.id} item={item} removed={() => removeFromCart(item.id)} />
+                                <CartItem key={item.id} item={item} removed={() => removeFromCart(item)} />
                             ))
                         )
                     )}
                     {activeStep === 2 && <ShippingForm setShippingForm={setShippingForm} />}
-                    {activeStep === 3 && <PaymentForm />}
+                    {activeStep === 3 && <StripePaymentForm shippingForm={shippingForm} />}
                 </div>
                 {/* DETAILS */}
                 <div className="w-full lg:w-5/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8 h-max">

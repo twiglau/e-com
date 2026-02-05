@@ -12,14 +12,27 @@ sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
 
   const lineItems = await Promise.all(
     cart.map(async (item) => {
-      const unitAmount = await getStripeProductPrice(item.id);
+      let unitAmount = await getStripeProductPrice(item.id);
+
+      // Fallback to item price if Stripe price not found
+      if (unitAmount === null || unitAmount === undefined) {
+        console.warn(
+          `Price for product ${item.id} not found in Stripe. Using item price: ${item.price}`,
+        );
+        unitAmount = Math.round(item.price * 100);
+      }
+
+      if (isNaN(unitAmount)) {
+        throw new Error(`Invalid price for product: ${item.name}`);
+      }
+
       return {
         price_data: {
           currency: "usd",
           product_data: {
             name: item.name,
           },
-          unit_amount: Number(unitAmount),
+          unit_amount: unitAmount,
         },
         quantity: item.quantity,
       };
@@ -38,10 +51,10 @@ sessionRoute.post("/create-checkout-session", shouldBeUser, async (c) => {
 
     // console.log(session);
 
-    return c.json({ checkoutSessionClientSecret: session.client_secret });
+    return c.json({ clientSecret: session.client_secret });
   } catch (error) {
     console.log(error);
-    return c.json({ error });
+    return c.json({ error: (error as Error).message }, 500);
   }
 });
 
