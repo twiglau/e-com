@@ -6,6 +6,7 @@ import { kafkaConsumer, kafkaProducer } from "./utils/kafka.js";
 import { runKafkaSubscriptions } from "./utils/subscriptions.js";
 import { cors } from "hono/cors";
 import sessionRoute from "./routes/session.route.js";
+import webhookRoute from "./routes/webhooks.route.js";
 
 const app = new Hono();
 
@@ -24,6 +25,7 @@ app.get("/", (c) => {
 });
 
 app.route("/sessions", sessionRoute);
+app.route("/webhooks", webhookRoute);
 
 app.get("/test", shouldBeUser, (c) => {
   return c.json({ message: "Payment service authenticated" });
