@@ -45,7 +45,7 @@ const ProductList = async ({
         search?:string, 
         params: "homepage" | "products"
 }) =>  {
-    const products = await fetchData({category, sort, search, params});
+    const products = await fetchData({category: category == 'all' ? '' : category, sort, search, params});
     return (
         <div className="w-full">
             <Categories />

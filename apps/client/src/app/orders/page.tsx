@@ -44,14 +44,14 @@ const OrdersPage = async () => {
     return (
         <div className="">
             <h1 className="text-2xl my-4 font-medium">Your Orders</h1>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-4 min-h-[calc(100vh-450px)]">
                 {orders.map((order) => (
-                    <li key={order._id} className="p-4 flex items-center">
-                        <div className="w-1/4">
-                           <span className="font-medium text-sm text-gray-500">
+                    <li key={order._id} className="p-4 flex items-center gap-4 w-full shadow-sm border border-gray-200 rounded-md">
+                        <div className="w-1/3">
+                           <span className="font-medium text-sm text-gray-500 ">
                               Order ID
                            </span>
-                           <p>{order._id}</p>
+                           <p className="text-wrap">{order._id}</p>
                         </div>
                         <div className="w-1/12">
                            <span className="font-medium text-sm text-gray-500">

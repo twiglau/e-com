@@ -87,16 +87,20 @@ export const getProducts = async (req: Request, res: Response) => {
     }
   })();
   try {
+    const whereCond: any = {};
+    if (search) {
+      whereCond.name = {
+        contains: search as string,
+        mode: "insensitive",
+      };
+    }
+    if (category && category !== "all") {
+      whereCond.category = {
+        slug: category as string,
+      };
+    }
     const products = await prisma.product.findMany({
-      where: {
-        category: {
-          slug: category as string,
-        },
-        name: {
-          contains: search as string,
-          mode: "insensitive",
-        },
-      },
+      where: whereCond,
       orderBy,
       take: limit ? Number(limit) : undefined,
       skip: page ? (Number(page) - 1) * Number(limit) : undefined,
