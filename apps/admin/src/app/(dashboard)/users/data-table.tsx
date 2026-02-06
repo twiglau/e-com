@@ -67,6 +67,7 @@ export function DataTable<TData, TValue>({
                                 },
                             }
                     );
+                    return res;
                 })
             );
         },

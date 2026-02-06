@@ -243,6 +243,28 @@ importers:
         specifier: ^5
         version: 5.9.2
 
+  apps/email-service:
+    dependencies:
+      '@repo/kafka':
+        specifier: workspace:*
+        version: link:../../packages/kafka
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      nodemailer:
+        specifier: ^7.0.6
+        version: 7.0.13
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/node':
+        specifier: ^24.5.2
+        version: 24.10.10
+      '@types/nodemailer':
+        specifier: ^7.0.1
+        version: 7.0.9
+
   apps/order-service:
     dependencies:
       '@clerk/fastify':
@@ -262,7 +284,7 @@ importers:
         version: 5.7.2
       stripe:
         specifier: ^20.3.0
-        version: 20.3.0(@types/node@20.19.30)
+        version: 20.3.0(@types/node@24.10.10)
     devDependencies:
       '@repo/types':
         specifier: workspace:*
@@ -1845,6 +1867,9 @@ packages:
   '@types/node@25.2.0':
     resolution: {integrity: sha512-DZ8VwRFUNzuqJ5khrvwMXHmvPe+zGayJhr2CDNiKB1WBE1ST8Djl00D0IC4vvNmHMdj6DlbYRIaFE7WHjlDl5w==}
 
+  '@types/nodemailer@7.0.9':
+    resolution: {integrity: sha512-vI8oF1M+8JvQhsId0Pc38BdUP2evenIIys7c7p+9OZXSPOH5c1dyINP1jT8xQ2xPuBUXmIC87s+91IZMDjH8Ow==}
+
   '@types/pg@8.16.0':
     resolution: {integrity: sha512-RmhMd/wD+CF8Dfo+cVIy3RR5cl8CyfXQ0tGgW6XBL8L4LM/UTEbNXYRbLwU6w+CgrKBNbrQWt4FUtTfaU5jSYQ==}
 
@@ -3138,6 +3163,10 @@ packages:
 
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
+
+  nodemailer@7.0.13:
+    resolution: {integrity: sha512-PNDFSJdP+KFgdsG3ZzMXCgquO7I6McjY2vlqILjtJd0hy8wEvtugS9xKRF2NWlPNGxvLCXlTNIae4serI7dinw==}
+    engines: {node: '>=6.0.0'}
 
   nypm@0.6.4:
     resolution: {integrity: sha512-1TvCKjZyyklN+JJj2TS3P4uSQEInrM/HkkuSXsEzm1ApPgBffOn8gFguNnZf07r/1X6vlryfIqMUkJKQMzlZiw==}
@@ -5266,11 +5295,11 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
 
   '@types/cors@2.8.19':
     dependencies:
@@ -5304,7 +5333,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -5331,9 +5360,13 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
+  '@types/nodemailer@7.0.9':
+    dependencies:
+      '@types/node': 24.10.10
+
   '@types/pg@8.16.0':
     dependencies:
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
       pg-protocol: 1.11.0
       pg-types: 2.2.0
 
@@ -5351,12 +5384,12 @@ snapshots:
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 20.19.30
+      '@types/node': 24.10.10
 
   '@types/webidl-conversions@7.0.3': {}
 
@@ -6791,6 +6824,8 @@ snapshots:
 
   node-fetch-native@1.6.7: {}
 
+  nodemailer@7.0.13: {}
+
   nypm@0.6.4:
     dependencies:
       citty: 0.2.0
@@ -7465,6 +7500,10 @@ snapshots:
   stripe@20.3.0(@types/node@20.19.30):
     optionalDependencies:
       '@types/node': 20.19.30
+
+  stripe@20.3.0(@types/node@24.10.10):
+    optionalDependencies:
+      '@types/node': 24.10.10
 
   styled-jsx@5.1.6(react@19.1.0):
     dependencies:
