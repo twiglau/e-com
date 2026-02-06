@@ -5,6 +5,7 @@ import { shouldBeUser } from "./middleware/authMiddleware.js";
 import categoryRouter from "./routes/category.route.js";
 import productRouter from "./routes/product.route.js";
 import { errorHandler } from "./utils/error.js";
+import { kafkaProducer, kafkaConsumer } from "./utils/kafka.js";
 
 const app = express();
 app.use(
@@ -30,6 +31,16 @@ app.use("/products", productRouter);
 
 app.use(errorHandler);
 
-app.listen(8000, "0.0.0.0", () => {
-  console.log("Product Server started on port 8000");
-});
+const start = async () => {
+  try {
+    await Promise.all([kafkaProducer.connect(), kafkaConsumer.connect()]);
+    app.listen(8000, "0.0.0.0", () => {
+      console.log("Product Server started on port 8000");
+    });
+  } catch (error) {
+    console.log("Product Server failed to start", error);
+    process.exit(1);
+  }
+};
+
+start();

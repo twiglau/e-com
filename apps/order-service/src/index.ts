@@ -28,17 +28,29 @@ app.register(orderRoute);
 
 const start = async () => {
   try {
-    // Promise.all([
-    //   await connnectionOrderDb(),
-    //   await kafkaProducer.connect(),
-    //   await kafkaConsumer.connect(),
-    // ]);
+    console.log("🚀 Starting Order Service...");
 
-    // await runKafkaSubscriptions();
-    await app.listen({ port: 8001, host: "0.0.0.0" });
-    console.log(`Order Server listening at http://localhost:8001`);
+    console.log("⏳ Connecting to DB...");
+    await connnectionOrderDb();
+    console.log("✅ DB connected");
+
+    console.log("⏳ Connecting to Kafka Producer...");
+    await kafkaProducer.connect();
+    console.log("✅ Kafka Producer connected");
+
+    console.log("⏳ Connecting to Kafka Consumer...");
+    await kafkaConsumer.connect();
+    console.log("✅ Kafka Consumer connected");
+
+    runKafkaSubscriptions().catch((err: unknown) =>
+      console.error("❌ Kafka subscription error:", err),
+    );
+    console.log("⏳ Kafka subscriptions starting in background...");
+
+    const address = await app.listen({ port: 8001, host: "0.0.0.0" });
+    console.log(`✅ Order Server listening at ${address}`);
   } catch (err) {
-    app.log.error(err);
+    console.error("❌ Order Service failed to start:", err);
     process.exit(1);
   }
 };

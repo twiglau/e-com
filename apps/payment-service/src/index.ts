@@ -33,8 +33,11 @@ app.get("/test", shouldBeUser, (c) => {
 
 const start = async () => {
   try {
-    // Promise.all([await kafkaConsumer.connect(), await kafkaConsumer.connect()]);
-    // await runKafkaSubscriptions();
+    await Promise.all([kafkaConsumer.connect(), kafkaProducer.connect()]);
+    runKafkaSubscriptions().catch((err: unknown) =>
+      console.error("❌ Kafka subscription error:", err),
+    );
+    console.log("⏳ Payment Kafka subscriptions starting in background...");
     serve(
       {
         fetch: app.fetch,
