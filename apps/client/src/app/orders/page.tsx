@@ -6,7 +6,7 @@ import { OrderType } from "@repo/types";
 const fetchOrders = async () => {
     try {
         const { getToken } = await auth();
-        const token = await getToken();
+        const token = await getToken({template: 'long-lived'});
 
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/user-orders`,

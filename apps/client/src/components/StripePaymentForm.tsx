@@ -33,7 +33,7 @@ export const StripePaymentForm = ({
     const { getToken } = useAuth();
 
     React.useEffect(() => {
-        getToken().then((token) => setToken(token));
+        getToken({template: 'long-lived'}).then((token) => setToken(token));
     }, [getToken]);
 
     const options = React.useMemo(() => {

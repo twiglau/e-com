@@ -35,6 +35,7 @@ export const shouldBeAdmin = (
   }
 
   const claims = auth.sessionClaims as CustomJwtSessionClaims;
+  console.log("claims", claims);
   if (claims.metadata?.role !== "admin") {
     return res.status(403).json({ message: "You are not authorized" });
   }
