@@ -14,22 +14,11 @@ import {
     DropdownMenuSeparator, 
     DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-
-const paymentStatusEnum = ["pending", "processing", "success", "failed"] as const;
-
-type PaymentStatus = typeof paymentStatusEnum[number];
-
-export type Payment = {
-    id: string;
-    status: PaymentStatus;
-    amount: number;
-    fullName: string;
-    userId: string;
-    email: string;
-};
+import { OrderType } from "@repo/types";
 
 
-export const columns: ColumnDef<Payment>[] = [
+
+export const columns: ColumnDef<OrderType>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -100,32 +89,35 @@ export const columns: ColumnDef<Payment>[] = [
         },
     },
     {
-        id: "actions",
+        accessorKey: "actions",
+        header: () => <div className="text-right">Actions</div>,
         cell: ({ row }) => {
         const payment = row.original;
 
         return (
-            <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
-                >
-                Copy payment ID
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                <Link href={`/users/${payment.userId}`}>View customer</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>View payment details</DropdownMenuItem>
-            </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center justify-end">
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem
+                        onClick={() => navigator.clipboard.writeText(payment._id)}
+                        >
+                        Copy payment ID
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                        <Link href={`/users/${payment.userId}`}>View customer</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
         );
         },
     },

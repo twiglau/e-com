@@ -18,7 +18,7 @@ export default async function RootLayout({
 }>) {
   
   return (
-    <ClerkProvider>
+    <ClerkProvider >
       <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSansVariable} ${geistMonoVariable} antialiased flex`}

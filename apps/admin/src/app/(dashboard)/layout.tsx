@@ -20,7 +20,7 @@ export default async function RootLayout({
   
   return (
     <QueryProvider>
-      <div className="flex">
+      <div className="w-full">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
